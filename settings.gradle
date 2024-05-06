@@ -21,3 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Mishloha Task"
 include ':app'
+include ':feature:domain'
+include ':feature:data'
+include ':feature:coreui'
