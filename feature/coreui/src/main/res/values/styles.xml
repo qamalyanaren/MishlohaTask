@@ -69,4 +69,11 @@
         <item name="android:textColor">@color/text_primary_fl</item>
         <item name="android:lineSpacingExtra">1sp</item>
     </style>
+
+    <style name="ModalBottomSheetDialog" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="backgroundTint">@color/background_deep</item>
+        <!--there is an issue in the material, we need elevation for having effect-->
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
+    </style>
 </resources>

@@ -6,11 +6,38 @@
     android:layout_height="match_parent"
     android:background="@color/background_deep"
     android:orientation="vertical"
-    android:paddingHorizontal="8dp"
-    android:paddingTop="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingTop="40dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/ivBack">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTitle"
+        style="@style/Text.Style.H2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Repositories" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/bg_rounded_26"
+        android:orientation="horizontal"
+        android:paddingHorizontal="8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvFilter"
+            style="@style/Text.Style.Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:gravity="center"
+            android:text="Daily" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRepositories"

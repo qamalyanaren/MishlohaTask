@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import aren.kamalyan.domain.entity.RepoUiEntity
 import aren.kamalyan.mishlohatask.databinding.ItemRepoBinding
+import coil.load
 
 class RepoViewHolder(
     private val binding: ItemRepoBinding,
@@ -33,6 +34,7 @@ class RepoViewHolder(
             tvDescription.isVisible = repo.description.isNotBlank()
             tvDescription.text = repo.description
             tvStars.text = "⭐ ${repo.starsCount}"
+            ivAvatar.load(repo.ownerAvatarUrl)
         }
     }
 
