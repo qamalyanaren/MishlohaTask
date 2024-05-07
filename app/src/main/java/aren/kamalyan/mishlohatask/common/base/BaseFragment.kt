@@ -21,7 +21,7 @@ abstract class BaseFragment<VM>(@LayoutRes layout: Int) :
 
     abstract val viewModel: VM
     open val applySystemPaddings: Boolean = true
-    open val systemPaddingParams: SystemPaddingParams = SystemPaddingParams()
+    open val systemPaddingParams: SystemPaddingParams = SystemPaddingParams(isTop = false)
     open val isLightStatusBar = false
     open val isLightNavBar = false
 

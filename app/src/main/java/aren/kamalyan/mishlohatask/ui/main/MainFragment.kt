@@ -2,6 +2,9 @@ package aren.kamalyan.mishlohatask.ui.main
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import aren.kamalyan.coreui.delegate.viewBinding
 import aren.kamalyan.mishlohatask.R
 import aren.kamalyan.mishlohatask.common.base.BaseFragment
@@ -21,23 +24,19 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     private fun setupBottomNavigation() {
-//        val navHostFragment = childFragmentManager.findFragmentById(
-//            R.id.mainNavContainer
-//        ) as NavHostFragment
-//        navController = navHostFragment.navController
-//
-//        binding.bottomNav.setupWithNavController(navController)
-//        binding.bottomNav.setOnItemReselectedListener { item ->
-//            // Pop everything up to the reselected item
-//            val selectedMenuItemNavGraph = navController.graph.findNode(item.itemId) as? NavGraph
-//            selectedMenuItemNavGraph?.let {
-//                navController.popBackStack(it.startDestinationId, inclusive = false)
-//            }
-//        }
+        val navHostFragment = childFragmentManager.findFragmentById(
+            R.id.mainNavContainer
+        ) as NavHostFragment
+        navController = navHostFragment.navController
+
+        binding.bottomNav.setupWithNavController(navController)
+        binding.bottomNav.setOnItemReselectedListener { item ->
+            // Pop everything up to the reselected item
+            val selectedMenuItemNavGraph = navController.graph.findNode(item.itemId) as? NavGraph
+            selectedMenuItemNavGraph?.let {
+                navController.popBackStack(it.startDestinationId, inclusive = false)
+            }
+        }
     }
 }

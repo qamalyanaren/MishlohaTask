@@ -13,11 +13,9 @@ import java.time.Year
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<SplashViewModel>(R.layout.fragment_splash) {
 
-    private val binding by viewBinding(FragmentSplashBinding::bind)
-
     override val viewModel: SplashViewModel by viewModels()
     override val systemPaddingParams: SystemPaddingParams =
-        super.systemPaddingParams.copy(isTop = false)
+        super.systemPaddingParams.copy(isBottom = false)
     override val isLightNavBar: Boolean = false
     override val isLightStatusBar: Boolean = false
 }

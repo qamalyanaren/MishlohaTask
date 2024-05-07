@@ -1,0 +1,72 @@
+<resources>
+    <!--Disable material3 style-->
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="android:background">@color/background_fl</item>
+        <item name="itemBackground">@null</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <!--Shapeable image view-->
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!--Texts and Fonts-->
+    <style name="Text.Style.H1" parent="Base.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/inter_extra_bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/text_primary_fl</item>
+        <item name="android:lineSpacingExtra">-7sp</item>
+    </style>
+
+    <style name="Text.Style.H2" parent="Base.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/inter_extra_bold</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/text_primary_fl</item>
+        <item name="android:lineSpacingExtra">-5sp</item>
+    </style>
+
+    <style name="Text.Style.H3" parent="Base.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/text_primary_fl</item>
+        <item name="lineHeight">29sp</item>
+        <item name="android:lineSpacingExtra">-4sp</item>
+    </style>
+
+    <style name="Text.Style.H4" parent="Base.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_primary_fl</item>
+        <item name="android:lineSpacingExtra">-4sp</item>
+    </style>
+
+    <style name="Text.Style.Body.Bold" parent="Base.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary_fl</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+    </style>
+
+    <style name="Text.Style.Body" parent="Base.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary_fl</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+    </style>
+
+    <style name="Text.Style.Body.Regular" parent="Base.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_primary_fl</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+    </style>
+
+    <style name="Text.Style.Description" parent="Base.TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_primary_fl</item>
+        <item name="android:lineSpacingExtra">1sp</item>
+    </style>
+</resources>

@@ -2,4 +2,17 @@
 <resources>
     <color name="warning">#ECBB3C</color>
     <color name="error">#D54031</color>
+
+    <!--FaceLift-->
+    <color name="background_fl">#222222</color>
+    <color name="background_deep">#181818</color>
+
+    <color name="grey_fl">#2E2E2E</color>
+    <color name="grey_btm_nav">#595858</color>
+
+    <color name="text_primary_fl">#FFFFFF</color>
+    <color name="text_secondary_fl">#A8A8A9</color>
+    <color name="text_tertiary">#424243</color>
+
+    <color name="green_fl">#64D981</color>
 </resources>

@@ -2,4 +2,7 @@
 <resources>
     <string name="dummy">dummy</string>
 
+    <!--Region main-->
+    <string name="menu_home_title">Home</string>
+    <string name="menu_favorite_title">Favorite</string>
 </resources>

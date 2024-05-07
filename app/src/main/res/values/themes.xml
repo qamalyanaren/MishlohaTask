@@ -1,15 +1,37 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.MishlohaTask" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green_fl</item>
+        <!--        <item name="colorPrimaryVariant">@color/accent_light_blue</item>-->
+        <item name="colorOnPrimary">@color/text_primary_fl</item>
+
+        <!--NOTE: this will remove material3 overlay-->
+        <item name="elevationOverlayEnabled">false</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/background_fl</item>
+        <!--        <item name="colorSecondaryVariant">@color/accent_light_blue</item>-->
+        <item name="colorOnSecondary">@color/text_primary_fl</item>
+        <!-- Surface brand color -->
+        <item name="colorSurface">@color/background_fl</item>
+        <item name="colorOnSurface">@color/text_primary_fl</item>
+        <item name="colorOnSurfaceVariant">@color/text_primary_fl</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/background_fl</item>
     </style>
 
     <style name="Theme.MishlohaTask.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/black</item>
-        <item name="windowSplashScreenAnimatedIcon">@color/black</item>
+        <item name="windowSplashScreenBackground">@color/background_deep</item>
+        <item name="windowSplashScreenAnimatedIcon">@color/background_deep</item>
         <item name="postSplashScreenTheme">@style/Theme.MishlohaTask</item>
     </style>
 
     <style name="Theme.MishlohaTask" parent="Base.Theme.MishlohaTask" />
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemBackground">@android:color/transparent</item>
+    </style>
 </resources>
