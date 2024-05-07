@@ -3,6 +3,7 @@ package aren.kamalyan.data.di
 import android.content.Context
 import aren.kamalyan.data.BuildConfig
 import aren.kamalyan.data.network.api.GithubApi
+import aren.kamalyan.data.network.interceptor.AuthorizationInterceptor
 import aren.kamalyan.domain.persistent.PrefManager
 import dagger.Module
 import dagger.Provides
@@ -19,7 +20,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -38,14 +38,11 @@ object NetworkModule {
     ): Retrofit = createRetrofit(jsonConfigs)
 
     @Singleton
-    @Named("Normal")
     @Provides
     fun provideOkHttpClient(
 //        exceptionInterceptor: ExceptionInterceptor,
         loggingInterceptor: HttpLoggingInterceptor,
         cache: Cache,
-        json: Json,
-        prefManager: PrefManager,
     ): OkHttpClient {
 
         return OkHttpClient.Builder()
@@ -57,24 +54,7 @@ object NetworkModule {
             .writeTimeout(TIMEOUT_WRITE_SECONDS, TimeUnit.SECONDS)
             .cache(cache)
 //            .addInterceptor(exceptionInterceptor)
-            .addInterceptor(loggingInterceptor)
-            .build()
-    }
-
-    @Singleton
-    @Named("Secure")
-    @Provides
-    fun provideSecureOkHttpClient(
-        @Named("Normal") okHttpClient: OkHttpClient,
-//        authInterceptor: AuthRequestInterceptor,
-        loggingInterceptor: HttpLoggingInterceptor,
-    ): OkHttpClient {
-        return okHttpClient.newBuilder()
-            .also { okHttpBuilder ->
-                //NOTE: to avoid duplicate logging
-                okHttpBuilder.interceptors().removeIf { it is HttpLoggingInterceptor }
-            }
-//            .addInterceptor(authInterceptor)
+            .addInterceptor(AuthorizationInterceptor())
             .addInterceptor(loggingInterceptor)
             .build()
     }
@@ -143,7 +123,7 @@ object NetworkModule {
     @Provides
     fun provideGithubApi(
         retrofit: Retrofit,
-        @Named("Normal") okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient
     ): GithubApi =
         createApiService(retrofit, okHttpClient)
 

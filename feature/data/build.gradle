@@ -11,6 +11,10 @@ room {
     schemaDirectory "$projectDir/schemas"
 }
 
+//NOTE: need to load environments from local.properties
+Properties properties = new Properties()
+properties.load(project.rootProject.file("local.properties").newDataInputStream())
+
 android {
     namespace 'aren.kamalyan.data'
     compileSdk 34
@@ -20,6 +24,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField("String", "GITHUB_TOKEN", properties.getProperty("github.token", ""))
+
     }
 
     buildTypes {

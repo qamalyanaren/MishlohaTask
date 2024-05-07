@@ -30,5 +30,7 @@ sealed class DateFilterUiEntity {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             return "created:>${dateFormat.format(calendar.time)}"
         }
+
+        fun entries(): List<DateFilterUiEntity> = listOf(Yesterday, LastWeek, LastMonth)
     }
 }
