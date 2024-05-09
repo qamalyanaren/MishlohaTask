@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 
-class GithubRepoSearchUseCase @Inject constructor(
+class GithubRepoUseCase @Inject constructor(
     private val repository: GithubRepository
 ) {
     operator fun invoke(dateFilter: DateFilterUiEntity): Flow<PagingData<RepoUiEntity>> =

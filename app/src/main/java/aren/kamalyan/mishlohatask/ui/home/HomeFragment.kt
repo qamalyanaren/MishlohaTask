@@ -2,6 +2,7 @@ package aren.kamalyan.mishlohatask.ui.home
 
 
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import aren.kamalyan.coreui.delegate.viewBinding
 import aren.kamalyan.coreui.extension.collectLatestWhenStarted
 import aren.kamalyan.coreui.extension.collectWhenStarted
@@ -10,7 +11,7 @@ import aren.kamalyan.coreui.utils.AdaptiveSpacingItemDecoration
 import aren.kamalyan.mishlohatask.R
 import aren.kamalyan.mishlohatask.common.base.BaseFragment
 import aren.kamalyan.mishlohatask.databinding.FragmentHomeBinding
-import aren.kamalyan.mishlohatask.ui.home.adapter.RepoAdapter
+import aren.kamalyan.mishlohatask.ui.home.adapter.RepoPagingAdapter
 import aren.kamalyan.mishlohatask.ui.home.filter.FilterBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,11 +22,23 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
 
     override val viewModel: HomeViewModel by viewModels()
     private val adapter by lazy {
-        RepoAdapter(
-            onItemClicked = {
-//                viewModel.navigateToRepoDetails(it.id)
+        RepoPagingAdapter(
+            onItemClicked = { repo ->
+                if (repo.isFavorite) viewModel.removeFromFavorite(repo)
+                else viewModel.addRepoToFavorite(repo)
+            },
+            onFavoriteItemClicked = { repo ->
+                if (repo.isFavorite) viewModel.removeFromFavorite(repo)
+                else viewModel.addRepoToFavorite(repo)
             }
-        )
+        ).also { adapter ->
+            adapter.addLoadStateListener { loadState ->
+                if (loadState.refresh is LoadState.NotLoading && viewModel.filterApplied.value) {
+                    binding.rvRepositories.scrollToPosition(0)
+                    viewModel.resetFilterAppliedFlag()
+                }
+            }
+        }
     }
 
     override fun initView() = with(binding) {
@@ -43,7 +56,9 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
     }
 
     override fun initObservers() {
-        collectLatestWhenStarted(viewModel.repositories, adapter::submitData)
+        collectLatestWhenStarted(viewModel.repositories) {
+            adapter.submitData(it)
+        }
         collectWhenStarted(viewModel.selectedFilter) {
             binding.tvFilter.text = it.toDateQuery()
         }

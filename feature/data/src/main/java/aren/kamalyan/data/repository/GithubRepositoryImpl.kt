@@ -3,6 +3,7 @@ package aren.kamalyan.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import aren.kamalyan.data.db.FavoriteDao
 import aren.kamalyan.data.network.api.GithubApi
 import aren.kamalyan.data.repository.paging.GithubRepoPagingSource
 import aren.kamalyan.domain.entity.DateFilterUiEntity
@@ -14,7 +15,8 @@ import javax.inject.Inject
 private const val PAGER_REPO_ITEM_SIZE = 20
 
 class GithubRepositoryImpl @Inject constructor(
-    private val githubApi: GithubApi
+    private val githubApi: GithubApi,
+    private val favoriteDao: FavoriteDao,
 ) : GithubRepository {
     override fun searchRepositories(dateFilter: DateFilterUiEntity): Flow<PagingData<RepoUiEntity>> =
         Pager(
@@ -26,6 +28,7 @@ class GithubRepositoryImpl @Inject constructor(
                 GithubRepoPagingSource(
                     githubApi = githubApi,
                     dateFilter = dateFilter,
+                    favoriteDao = favoriteDao,
                 )
             }
         ).flow
