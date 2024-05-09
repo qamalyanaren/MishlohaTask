@@ -17,8 +17,13 @@ data class RepoUiEntity(
     val createdAt: Date? = null,
     val htmlUrl: String? = null,
 
-    val isFavorite: Boolean = false,
+    var isFavorite: Boolean = false,
 ) {
+
+    fun withFavoriteStatus(isFavorite: Boolean): RepoUiEntity {
+        return this.copy(isFavorite = isFavorite)
+    }
+
     companion object {
         val REPO_COMPARATOR = object : DiffUtil.ItemCallback<RepoUiEntity>() {
             override fun areItemsTheSame(oldItem: RepoUiEntity, newItem: RepoUiEntity): Boolean {

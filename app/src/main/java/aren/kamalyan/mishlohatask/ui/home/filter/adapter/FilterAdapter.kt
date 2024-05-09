@@ -7,7 +7,7 @@ import aren.kamalyan.mishlohatask.ui.home.filter.FilterItem
 
 class FilterAdapter(
     private val onItemClicked: (repo: FilterItem) -> Unit
-) : ListAdapter<FilterItem, FilterViewHolder>(REPO_COMPARATOR) {
+) : ListAdapter<FilterItem, FilterViewHolder>(FILTER_ITEM_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterViewHolder =
         FilterViewHolder.create(parent, onItemClicked)
@@ -18,7 +18,7 @@ class FilterAdapter(
     }
 
     companion object {
-        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<FilterItem>() {
+        private val FILTER_ITEM_COMPARATOR = object : DiffUtil.ItemCallback<FilterItem>() {
             override fun areItemsTheSame(oldItem: FilterItem, newItem: FilterItem): Boolean {
                 return oldItem.dateFilter == newItem.dateFilter
             }

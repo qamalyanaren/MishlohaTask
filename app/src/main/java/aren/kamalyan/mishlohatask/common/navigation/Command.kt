@@ -1,4 +1,4 @@
-package app.shiva.vpn.common.navigation
+package aren.kamalyan.mishlohatask.common.navigation
 
 import androidx.navigation.NavDirections
 

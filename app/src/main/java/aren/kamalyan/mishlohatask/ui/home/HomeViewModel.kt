@@ -55,6 +55,7 @@ class HomeViewModel @Inject constructor(
                 _filterApplied.value = true
             }
             .launchIn(viewModelScope)
+
         favoriteActionDelegate.favoriteAction
             .onEach { action ->
                 val isFavorite = action.type == ActionType.ADD
@@ -81,7 +82,7 @@ class HomeViewModel @Inject constructor(
                 }
             }
 
-    fun addRepoToFavorite(repo: RepoUiEntity) {
+    private fun addRepoToFavorite(repo: RepoUiEntity) {
         addToFavoriteUseCase(repo)
             .flowOn(Dispatchers.IO)
             .onEach {
@@ -99,7 +100,7 @@ class HomeViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    fun removeFromFavorite(repo: RepoUiEntity) {
+    private fun removeFromFavorite(repo: RepoUiEntity) {
         removeFromFavoriteUseCase(repo)
             .flowOn(Dispatchers.IO)
             .onEach {
@@ -115,5 +116,13 @@ class HomeViewModel @Inject constructor(
                 it.printStackTrace()
             }
             .launchIn(viewModelScope)
+    }
+
+    fun onFavoriteItemClicked(repo: RepoUiEntity) {
+        if (repo.isFavorite) {
+            removeFromFavorite(repo)
+        } else {
+            addRepoToFavorite(repo)
+        }
     }
 }

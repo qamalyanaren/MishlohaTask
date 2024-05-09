@@ -41,6 +41,9 @@ dependencies {
     implementation libs.hilt.android
     ksp libs.hilt.compiler
 
+    api libs.rx3.java
+    api libs.rx3.android
+
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

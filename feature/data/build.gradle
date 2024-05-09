@@ -70,6 +70,10 @@ dependencies {
     ksp libs.androidx.room.compiler
     implementation libs.androidx.room.ktx
 
+    //NOTE: just for showing how works with java
+    implementation libs.androidx.room.rx
+    annotationProcessor libs.androidx.room.compiler
+
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import app.shiva.vpn.common.navigation.Command
+import aren.kamalyan.mishlohatask.common.navigation.Command
 import aren.kamalyan.coreui.extension.addSystemPadding
 import aren.kamalyan.coreui.extension.collectWhenStarted
 import aren.kamalyan.coreui.extension.hideKeyboard

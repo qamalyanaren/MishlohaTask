@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import app.shiva.vpn.common.navigation.Command
+import aren.kamalyan.mishlohatask.common.navigation.Command
 import aren.kamalyan.coreui.extension.collectWhenStarted
 import aren.kamalyan.coreui.extension.hideKeyboard
 import aren.kamalyan.mishlohatask.common.extension.navigateSafe

@@ -15,4 +15,6 @@ abstract class MishlohaDatabase : RoomDatabase() {
 
     abstract fun favoriteDao(): FavoriteDao
 
+    abstract fun favoriteJavaDao(): FavoriteJavaDao
+
 }

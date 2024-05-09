@@ -6,14 +6,13 @@ import aren.kamalyan.domain.entity.RepoUiEntity
 
 class RepoListAdapter(
     private val onItemClicked: (repo: RepoUiEntity) -> Unit,
-    private val onFavoriteItemClicked: (repo: RepoUiEntity) -> Unit,
+    private val onFavoriteClicked: (repo: RepoUiEntity) -> Unit,
 ) : ListAdapter<RepoUiEntity, RepoViewHolder>(RepoUiEntity.REPO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder =
-        RepoViewHolder.create(parent, onItemClicked, onFavoriteItemClicked)
+        RepoViewHolder.create(parent, onItemClicked, onFavoriteClicked)
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
-        val uiModel = getItem(position)
-        holder.bind(uiModel)
+        holder.bind(getItem(position))
     }
 }
