@@ -26,6 +26,8 @@ kotlinxSerializationJson = "1.6.3"
 
 coil = "2.6.0"
 
+rx = "3.0.0"
+
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -49,6 +51,7 @@ androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", versio
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+androidx-room-rx = { group = "androidx.room", name = "room-rxjava3", version.ref = "room" }
 
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
@@ -61,6 +64,9 @@ retrofit-kotlin-serialization = { group = "com.squareup.retrofit2", name = "conv
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+
+rx3-java = { group = "io.reactivex.rxjava3", name = "rxjava", version.ref = "rx" }
+rx3-android = { group = "io.reactivex.rxjava3", name = "rxandroid", version.ref = "rx" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

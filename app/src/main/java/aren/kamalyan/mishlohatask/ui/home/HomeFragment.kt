@@ -11,6 +11,7 @@ import aren.kamalyan.coreui.utils.AdaptiveSpacingItemDecoration
 import aren.kamalyan.mishlohatask.R
 import aren.kamalyan.mishlohatask.common.base.BaseFragment
 import aren.kamalyan.mishlohatask.databinding.FragmentHomeBinding
+import aren.kamalyan.mishlohatask.ui.details.RepoDetailDialog
 import aren.kamalyan.mishlohatask.ui.home.adapter.RepoPagingAdapter
 import aren.kamalyan.mishlohatask.ui.home.filter.FilterBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,18 +20,20 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
 
     private val binding by viewBinding(FragmentHomeBinding::bind)
+    private lateinit var repoDialog: RepoDetailDialog
 
     override val viewModel: HomeViewModel by viewModels()
     private val adapter by lazy {
         RepoPagingAdapter(
             onItemClicked = { repo ->
-                if (repo.isFavorite) viewModel.removeFromFavorite(repo)
-                else viewModel.addRepoToFavorite(repo)
+                repoDialog =
+                    RepoDetailDialog(
+                        this,
+                        repo
+                    );
+                repoDialog.show()
             },
-            onFavoriteItemClicked = { repo ->
-                if (repo.isFavorite) viewModel.removeFromFavorite(repo)
-                else viewModel.addRepoToFavorite(repo)
-            }
+            onFavoriteClicked = viewModel::onFavoriteItemClicked
         ).also { adapter ->
             adapter.addLoadStateListener { loadState ->
                 if (loadState.refresh is LoadState.NotLoading && viewModel.filterApplied.value) {
@@ -62,5 +65,12 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
         collectWhenStarted(viewModel.selectedFilter) {
             binding.tvFilter.text = it.toDateQuery()
         }
+    }
+
+    override fun onDestroyView() {
+        if (::repoDialog.isInitialized) {
+            repoDialog.cancel()
+        }
+        super.onDestroyView()
     }
 }

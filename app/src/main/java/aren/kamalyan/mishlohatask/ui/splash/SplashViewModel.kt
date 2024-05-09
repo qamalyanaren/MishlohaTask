@@ -1,7 +1,7 @@
 package aren.kamalyan.mishlohatask.ui.splash
 
 import androidx.lifecycle.viewModelScope
-import app.shiva.vpn.common.navigation.Command
+import aren.kamalyan.mishlohatask.common.navigation.Command
 import aren.kamalyan.mishlohatask.common.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay

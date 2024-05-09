@@ -10,8 +10,8 @@ import coil.load
 
 class RepoViewHolder(
     private val binding: ItemRepoBinding,
-    onItemClicked: (repo: RepoUiEntity) -> Unit,
-    onFavoriteItemClicked: (repo: RepoUiEntity) -> Unit
+    private val onItemClicked: (repo: RepoUiEntity) -> Unit,
+    private val onFavoriteClicked: (repo: RepoUiEntity) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private var repoEntity: RepoUiEntity? = null
@@ -21,7 +21,7 @@ class RepoViewHolder(
             repoEntity?.let(onItemClicked)
         }
         binding.ivAvatar.setOnClickListener {
-            repoEntity?.let(onFavoriteItemClicked)
+            repoEntity?.let(onFavoriteClicked)
         }
     }
 
@@ -45,14 +45,14 @@ class RepoViewHolder(
         fun create(
             parent: ViewGroup,
             onItemClicked: (repo: RepoUiEntity) -> Unit,
-            onFavoriteItemClicked: (repo: RepoUiEntity) -> Unit
+            onFavoriteClicked: (repo: RepoUiEntity) -> Unit
         ): RepoViewHolder {
             val binding = ItemRepoBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            return RepoViewHolder(binding, onItemClicked, onFavoriteItemClicked)
+            return RepoViewHolder(binding, onItemClicked, onFavoriteClicked)
         }
     }
 }
