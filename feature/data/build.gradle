@@ -41,6 +41,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
@@ -55,6 +56,8 @@ android {
 
 dependencies {
     implementation project(":feature:domain")
+
+    coreLibraryDesugaring libs.android.desugarJdkLibs
 
     implementation libs.androidx.crypto
     implementation libs.okhttp.logging

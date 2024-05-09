@@ -2,6 +2,7 @@ package aren.kamalyan.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
 
 @Database(
@@ -9,6 +10,7 @@ import androidx.room.RoomDatabase
     entities = [FavoriteDBEntity::class],
     exportSchema = true //NOTE: need for migration
 )
+@TypeConverters(DateConverter::class)
 abstract class MishlohaDatabase : RoomDatabase() {
 
     abstract fun favoriteDao(): FavoriteDao
