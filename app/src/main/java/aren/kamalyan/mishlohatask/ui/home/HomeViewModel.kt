@@ -3,6 +3,7 @@ package aren.kamalyan.mishlohatask.ui.home
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.map
+import aren.kamalyan.domain.NetworkMonitor
 import aren.kamalyan.domain.delegate.ActionType
 import aren.kamalyan.domain.delegate.FavoriteAction
 import aren.kamalyan.domain.delegate.FavoriteActionDelegate
@@ -31,6 +32,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     filterDelegate: SelectFilterDelegate,
+    private val networkMonitor: NetworkMonitor,
     private val favoriteActionDelegate: FavoriteActionDelegate,
     private val pagingActionDelegate: PagingActionDelegate,
     private val githubRepoUseCase: GithubRepoUseCase,
@@ -43,6 +45,9 @@ class HomeViewModel @Inject constructor(
 
     private val _filterApplied = MutableStateFlow(false)
     val filterApplied = _filterApplied.asStateFlow()
+
+    private val _showNoNetworkView = MutableStateFlow(false)
+    val showNoNetworkView = _showNoNetworkView.asStateFlow()
 
     fun resetFilterAppliedFlag() {
         _filterApplied.value = false
@@ -63,6 +68,10 @@ class HomeViewModel @Inject constructor(
                 pagingActionDelegate.act(pagingAction)
             }
             .launchIn(viewModelScope)
+
+        networkMonitor.isNetworkAvailable.onEach {
+            _showNoNetworkView.value = !it
+        }.launchIn(viewModelScope)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

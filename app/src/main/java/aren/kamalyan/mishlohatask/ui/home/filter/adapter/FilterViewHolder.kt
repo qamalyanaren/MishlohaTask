@@ -2,7 +2,6 @@ package aren.kamalyan.mishlohatask.ui.home.filter.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import aren.kamalyan.mishlohatask.databinding.ItemFilterBinding
 import aren.kamalyan.mishlohatask.ui.home.filter.FilterItem
@@ -16,15 +15,13 @@ class FilterViewHolder(
 
     init {
         binding.root.setOnClickListener {
-            filterItem?.let {
-                onItemClicked.invoke(it)
-            }
+            filterItem?.let(onItemClicked)
         }
     }
 
     fun bind(filter: FilterItem) = with(binding) {
         filterItem = filter
-        tvFilter.text = filter.dateFilter.toDateQuery() //TODO name
+        tvFilter.setText(filter.dateFilter.titleRes)
         ivFilter.isSelected = filter.isSelected
     }
 

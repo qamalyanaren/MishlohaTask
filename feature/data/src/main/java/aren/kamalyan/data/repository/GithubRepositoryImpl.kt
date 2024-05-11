@@ -12,7 +12,7 @@ import aren.kamalyan.domain.repository.GithubRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-private const val PAGER_REPO_ITEM_SIZE = 20
+private const val PAGER_REPO_ITEM_SIZE = 100
 
 class GithubRepositoryImpl @Inject constructor(
     private val githubApi: GithubApi,
@@ -22,7 +22,7 @@ class GithubRepositoryImpl @Inject constructor(
         Pager(
             config = PagingConfig(
                 pageSize = PAGER_REPO_ITEM_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
             ),
             pagingSourceFactory = {
                 GithubRepoPagingSource(

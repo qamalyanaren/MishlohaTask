@@ -1,6 +1,7 @@
 package aren.kamalyan.mishlohatask.ui.home
 
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import aren.kamalyan.coreui.delegate.viewBinding
@@ -40,6 +41,8 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
                     binding.rvRepositories.scrollToPosition(0)
                     viewModel.resetFilterAppliedFlag()
                 }
+                binding.loadingView.container.isVisible =
+                    loadState.source.refresh is LoadState.Loading
             }
         }
     }
@@ -58,12 +61,17 @@ class HomeFragment : BaseFragment<HomeViewModel>(R.layout.fragment_home) {
 
     }
 
+
     override fun initObservers() {
         collectLatestWhenStarted(viewModel.repositories) {
             adapter.submitData(it)
         }
         collectWhenStarted(viewModel.selectedFilter) {
-            binding.tvFilter.text = it.toDateQuery()
+            binding.tvFilter.setText(it.titleRes)
+        }
+        collectWhenStarted(viewModel.showNoNetworkView) {
+            binding.noNetworkView.container.isVisible = it
+            if (!it) adapter.retry()
         }
     }
 

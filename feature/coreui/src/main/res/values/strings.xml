@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dummy">dummy</string>
+    <string name="repo_no_description">No description available.</string>
+
+    <string name="network_not_available_title">Failed to load screen</string>
+    <string name="network_not_available_message">Check your internet connection</string>
 
     <!--Region main-->
     <string name="menu_home_title">Home</string>
-    <string name="menu_favorite_title">Favorite</string>
+    <string name="menu_favorite_title">Favorites</string>
+
+    <!--Region home-->
+    <string name="home_title">Popular repositories</string>
+
+    <!--Region favorite-->
+    <string name="favorite_title">Favorites</string>
+    <string name="favorite_empty_title">You haven\'t saved any repository yet</string>
+    <string name="favorite_empty_message">Save a repository by selecting heart icon on the home screen</string>
+
+    <!--Region filter-->
+    <string name="filter_select_title">Select a period</string>
 </resources>

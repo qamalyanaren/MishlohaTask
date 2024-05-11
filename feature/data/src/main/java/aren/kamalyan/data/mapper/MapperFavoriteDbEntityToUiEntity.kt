@@ -11,7 +11,7 @@ class MapperFavoriteDbEntityToUiEntity :
         return RepoUiEntity(
             id = from.id,
             name = from.name,
-            description = from.description.orEmpty(),
+            description = from.description,
             starsCount = from.starsCount,
             ownerAvatarUrl = from.ownerAvatarUrl,
             ownerName = from.ownerName,

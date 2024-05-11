@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/background_deep"
     android:orientation="vertical"
-    android:paddingHorizontal="16dp"
     android:paddingTop="40dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -17,12 +16,14 @@
         style="@style/Text.Style.H2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Repositories" />
+        android:layout_marginHorizontal="16dp"
+        android:text="@string/home_title" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/llFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:background="@drawable/bg_rounded_26"
         android:orientation="horizontal"
@@ -35,18 +36,38 @@
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_arrow_down"
             android:gravity="center"
-            android:text="Daily" />
+            tools:text="Daily" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRepositories"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="2"
-        tools:listitem="@layout/item_repo" />
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="8dp">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRepositories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_repo" />
+
+        <include
+            android:id="@+id/loadingView"
+            layout="@layout/layout_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/noNetworkView"
+            layout="@layout/layout_error_network"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+    </FrameLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>
 
 

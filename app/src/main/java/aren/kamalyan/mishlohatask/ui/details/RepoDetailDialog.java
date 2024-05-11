@@ -60,8 +60,7 @@ public class RepoDetailDialog extends Dialog {
     private void showRepoDetails(RepoUiEntity repo) {
         Coil.imageLoader(getContext()).enqueue(new ImageRequest.Builder(getContext())
                 .data(repo.getOwnerAvatarUrl())
-//                .placeholder(R.drawable.ic_avatar_placeholder)
-//                .error(R.drawable.ic_avatar_error)
+                .error(aren.kamalyan.coreui.R.drawable.avatar)
                 .target(binding.ivAvatar)
                 .build());
 
@@ -95,7 +94,7 @@ public class RepoDetailDialog extends Dialog {
     }
 
     private String getDescriptionText(RepoUiEntity repo) {
-        return (repo.getDescription().isEmpty()) ? "No description provided." : repo.getDescription();
+        return (repo.getDescription() == null || repo.getDescription().isEmpty()) ? getContext().getString(aren.kamalyan.coreui.R.string.repo_no_description) : repo.getDescription();
     }
 
     private String getLanguageText(RepoUiEntity repo) {

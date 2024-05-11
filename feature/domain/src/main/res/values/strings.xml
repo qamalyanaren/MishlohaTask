@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="filter_yesterday">Yesterday</string>
+    <string name="filter_weak_ago">A weak ago</string>
+    <string name="filter_month_ago">A month ago</string>
+    <string name="filter_custom">Custom</string>
+</resources>
