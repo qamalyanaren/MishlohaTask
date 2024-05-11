@@ -1,11 +1,14 @@
 package aren.kamalyan.mishlohatask.ui.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import aren.kamalyan.coreui.extension.getString
 import aren.kamalyan.domain.entity.RepoUiEntity
 import aren.kamalyan.mishlohatask.databinding.ItemRepoBinding
+import aren.kamalyan.mishlohatask.utils.RDrawable
+import aren.kamalyan.mishlohatask.utils.RString
 import coil.load
 
 class RepoViewHolder(
@@ -20,24 +23,26 @@ class RepoViewHolder(
         binding.root.setOnClickListener {
             repoEntity?.let(onItemClicked)
         }
-        binding.ivAvatar.setOnClickListener {
+        binding.ivFavorite.setOnClickListener {
             repoEntity?.let(onFavoriteClicked)
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun bind(repo: RepoUiEntity?) = with(binding) {
+        repoEntity = repo
         if (repo == null) {
-            tvName.text = "exav"
-            tvDescription.isVisible = false
-            tvStars.text = "of e"
+            tvName.text = "..."
         } else {
-            repoEntity = repo
-            tvName.text = repo.name
-            tvDescription.isVisible = repo.description.isNotBlank()
-            tvDescription.text = repo.description
+            tvName.text = repo.ownerName?.let { it + "/" + repo.name } ?: repo.name
+            tvDescription.text = repo.description ?: getString(RString.repo_no_description)
             tvStars.text = "⭐ ${repo.starsCount}"
-            ivAvatar.load(repo.ownerAvatarUrl)
-            tvStars.isVisible = repo.isFavorite
+            ivFavorite.isSelected = repo.isFavorite
+            ivAvatar.load(repo.ownerAvatarUrl) {
+                crossfade(true)
+                error(RDrawable.avatar)
+            }
+
         }
     }
 

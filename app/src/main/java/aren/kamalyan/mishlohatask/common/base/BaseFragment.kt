@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import aren.kamalyan.mishlohatask.common.navigation.Command
 import aren.kamalyan.coreui.extension.addSystemPadding
 import aren.kamalyan.coreui.extension.collectWhenStarted
 import aren.kamalyan.coreui.extension.hideKeyboard
 import aren.kamalyan.mishlohatask.common.extension.navigateSafe
+import aren.kamalyan.mishlohatask.common.navigation.Command
 import aren.kamalyan.mishlohatask.utils.manager.LightSystemBarsManager
 import aren.kamalyan.mishlohatask.utils.manager.system_padding.SystemPaddingParams
 

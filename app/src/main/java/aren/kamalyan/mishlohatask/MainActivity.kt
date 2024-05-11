@@ -5,9 +5,7 @@ import android.view.Window
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
-import androidx.core.view.WindowInsetsCompat
 import aren.kamalyan.mishlohatask.databinding.ActivityMainBinding
 import aren.kamalyan.mishlohatask.utils.manager.LightSystemBarsManager
 import dagger.hilt.android.AndroidEntryPoint

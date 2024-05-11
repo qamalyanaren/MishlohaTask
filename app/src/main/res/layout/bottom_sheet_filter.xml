@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="22dp"
-        android:text="Select filter" />
+        android:text="@string/filter_select_title" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFilter"
@@ -25,5 +25,4 @@
         android:layout_marginBottom="40dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_filter" />
-
 </LinearLayout>

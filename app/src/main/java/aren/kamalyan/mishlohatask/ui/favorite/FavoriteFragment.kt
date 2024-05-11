@@ -1,6 +1,7 @@
 package aren.kamalyan.mishlohatask.ui.favorite
 
 
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import aren.kamalyan.coreui.delegate.viewBinding
 import aren.kamalyan.coreui.extension.collectWhenStarted
@@ -40,7 +41,10 @@ class FavoriteFragment : BaseFragment<FavoriteViewModel>(R.layout.fragment_favor
     }
 
     override fun initObservers() {
-        collectWhenStarted(viewModel.repos, adapter::submitList)
+        collectWhenStarted(viewModel.repos) {
+            binding.emptyView.container.isVisible = it.isEmpty()
+            adapter.submitList(it)
+        }
     }
 
     override fun onDestroyView() {

@@ -4,7 +4,7 @@ import android.content.Context
 import aren.kamalyan.data.BuildConfig
 import aren.kamalyan.data.network.api.GithubApi
 import aren.kamalyan.data.network.interceptor.AuthorizationInterceptor
-import aren.kamalyan.domain.persistent.PrefManager
+import aren.kamalyan.data.network.interceptor.NetworkConnectionInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,18 +33,24 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        jsonConfigs: Json,
-        prefManager: PrefManager,
-    ): Retrofit = createRetrofit(jsonConfigs)
+        okHttpClient: OkHttpClient,
+        jsonConfigs: Json
+    ): Retrofit {
+        val converterFactory = jsonConfigs.asConverterFactory("application/json".toMediaType())
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.API_BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(converterFactory)
+            .build()
+    }
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideOkHttpClient(
-//        exceptionInterceptor: ExceptionInterceptor,
+        @ApplicationContext context: Context,
         loggingInterceptor: HttpLoggingInterceptor,
-        cache: Cache,
+        cache: Cache
     ): OkHttpClient {
-
         return OkHttpClient.Builder()
             .retryOnConnectionFailure(true)
             .followRedirects(true)
@@ -53,12 +59,11 @@ object NetworkModule {
             .readTimeout(TIMEOUT_READ_SECONDS, TimeUnit.SECONDS)
             .writeTimeout(TIMEOUT_WRITE_SECONDS, TimeUnit.SECONDS)
             .cache(cache)
-//            .addInterceptor(exceptionInterceptor)
             .addInterceptor(AuthorizationInterceptor())
             .addInterceptor(loggingInterceptor)
+            .addNetworkInterceptor(NetworkConnectionInterceptor(context))
             .build()
     }
-
 
     @Provides
     @Singleton
@@ -70,6 +75,7 @@ object NetworkModule {
         }
     }
 
+
     @OptIn(ExperimentalSerializationApi::class)
     @Provides
     @Singleton
@@ -80,57 +86,14 @@ object NetworkModule {
         encodeDefaults = true
     }
 
-    private fun createRetrofit(
-        json: Json
-    ): Retrofit {
-        val converterFactory = json.asConverterFactory("application/json".toMediaType())
-
-        return Retrofit.Builder()
-            .baseUrl(BuildConfig.API_BASE_URL)
-            .addConverterFactory(converterFactory)
-            .build()
-    }
-
-    private inline fun <reified T> createApiService(
-        retrofit: Retrofit,
-        okHttpClient: OkHttpClient
-    ): T {
-        return retrofit.newBuilder().client(okHttpClient).build().create(T::class.java)
-    }
-
-//    @Provides
-//    @Singleton
-//    fun provideNetworkInterceptor(@ApplicationContext context: Context): Interceptor {
-//        return Interceptor { chain: Interceptor.Chain ->
-//            val request = chain.request()
-//            val newRequest = if (context.hasNetworkConnection()) {
-//                request.newBuilder()
-//                    .header("Cache-Control", "public, max-age=" + 60)
-//                    .build()
-//            } else {
-//                request.newBuilder()
-//                    .header(
-//                        "Cache-Control",
-//                        "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7
-//                    )
-//                    .build()
-//            }
-//            chain.proceed(newRequest)
-//        }
-//    }
-
-    @Singleton
     @Provides
-    fun provideGithubApi(
-        retrofit: Retrofit,
-        okHttpClient: OkHttpClient
-    ): GithubApi =
-        createApiService(retrofit, okHttpClient)
-
     @Singleton
+    fun provideGithubApi(retrofit: Retrofit): GithubApi = retrofit.create(GithubApi::class.java)
+
     @Provides
+    @Singleton
     fun provideCache(@ApplicationContext context: Context): Cache {
-        val cacheSize = 10 * 1024 * 1024.toLong() // 10 MB
+        val cacheSize = 10 * 1024 * 1024L // 10 MB
         val httpCacheDirectory = File(context.cacheDir, "http-cache")
         return Cache(httpCacheDirectory, cacheSize)
     }

@@ -13,7 +13,7 @@ class MapperRepoEntityToUiEntity(private val favorites: List<FavoriteDBEntity>) 
         return RepoUiEntity(
             id = from.id,
             name = from.name,
-            description = from.description.orEmpty(),
+            description = from.description,
             starsCount = from.starsCount,
             ownerAvatarUrl = from.owner?.avatarUrl,
             ownerName = from.owner?.login,
