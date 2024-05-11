@@ -46,3 +46,13 @@ We adopted the MVVM (Model-View-ViewModel) pattern while adhering to Clean Archi
 - **UI Testing**: Needs comprehensive UI testing for all main features.
 - **Search for Each Page**: Implement separate search capabilities for each page.
 
+## APK and Local Setup
+
+- **APK**: The APK file is available in the GitHub artifact section.
+- **Local Development**: To run the project locally, you'll need a GitHub authentication token. Add a `local.properties` file to your project root and include the following:
+
+    ```properties
+    github.token="<your-account-token>"
+    ```
+
+

@@ -24,7 +24,7 @@ jobs:
 
       - name: Create local.properties
         run: |
-          echo "github.token=${{ secrets.AUTH_TOKEN }}" > local.properties
+          echo "github.token=${{ secrets.AUTH_GITHUB_TOKEN }}" > local.properties
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
