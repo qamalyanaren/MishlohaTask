@@ -12,6 +12,7 @@
 
     <!--Region home-->
     <string name="home_title">Popular repositories</string>
+    <string name="home_started_from">Started from:</string>
 
     <!--Region favorite-->
     <string name="favorite_title">Favorites</string>
@@ -20,4 +21,13 @@
 
     <!--Region filter-->
     <string name="filter_select_title">Select a period</string>
+
+    <!--Region dialog details-->
+    <string name="repo_details_language_not_specified">Not specified</string>
+    <string name="repo_details_language"><b>Language:</b> %s</string>
+    <string name="repo_details_fork"><b>Forks:</b> %d</string>
+    <string name="repo_details_star"><b>Stars:</b> %d</string>
+    <string name="repo_details_created_on"><b>Created on:</b> %s</string>
+    <string name="repo_details_go_to_github">Go to GitHub</string>
+
 </resources>

@@ -1,75 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_deep"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@android:color/transparent"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/ivAvatar"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/avatar"
-        app:shapeAppearanceOverlay="@style/circleImageView" />
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/text_primary_fl"
-        android:textStyle="bold" />
+        android:background="@color/background_deep"
+        android:padding="16dp">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textColor="@color/text_primary_fl"
-        android:textStyle="italic" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/text_primary_fl" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/avatar"
+                app:shapeAppearanceOverlay="@style/circleImageView" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvLanguage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:textColor="@color/text_primary_fl" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvUsername"
+                style="@style/Text.Style.Body.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                tools:text="Username" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvForksCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_primary_fl" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                style="@style/Text.Style.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="italic"
+                tools:text="Repository" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvStartCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_primary_fl" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDescription"
+                style="@style/Text.Style.Body.Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvCreatedDAte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_primary_fl" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLanguage"
+                style="@style/Text.Style.Body.Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnGithubLink"
-        android:layout_width="wrap_content"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvForksCount"
+                style="@style/Text.Style.Body.Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/green_fl"
-        android:text="Go to GitHub" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvStartCount"
+                style="@style/Text.Style.Body.Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCreatedDAte"
+                style="@style/Text.Style.Body.Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGithubLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:backgroundTint="@color/green_fl"
+                android:text="@string/repo_details_go_to_github" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="top|end"
+            android:src="@drawable/selector_favorite" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivClose"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="top|start"
+            android:src="@drawable/ic_close" />
+
+    </FrameLayout>
+</ScrollView>

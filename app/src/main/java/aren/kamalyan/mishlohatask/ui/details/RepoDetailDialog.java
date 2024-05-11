@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import aren.kamalyan.domain.entity.RepoUiEntity;
 import aren.kamalyan.mishlohatask.databinding.DialogRepositoryDetailBinding;
+import aren.kamalyan.mishlohatask.utils.DateFormatter;
 import coil.Coil;
 import coil.request.ImageRequest;
 
@@ -46,6 +47,9 @@ public class RepoDetailDialog extends Dialog {
             window.setBackgroundDrawableResource(android.R.color.transparent);
         }
         initObservers();
+        binding.ivClose.setOnClickListener(v -> {
+            dismiss();
+        });
     }
 
     private void initObservers() {
@@ -64,17 +68,18 @@ public class RepoDetailDialog extends Dialog {
                 .target(binding.ivAvatar)
                 .build());
 
-        binding.tvUsername.setText(repo.getOwnerName());
+        binding.tvUsername.setText(getOwnerUsernameText(repo));
         binding.tvName.setText(repo.getName());
         binding.tvDescription.setText(getDescriptionText(repo));
-        binding.tvLanguage.setText("Language: " + getLanguageText(repo));
-        binding.tvForksCount.setText("Forks: " + repo.getForksCount());
-        binding.tvStartCount.setText("Stars: " + repo.getStarsCount());
-        binding.tvCreatedDAte.setText("Created on: " + repo.getCreatedAt());
+        binding.tvLanguage.setText(getContext().getString(aren.kamalyan.coreui.R.string.repo_details_language, getLanguageText(repo)));
+        binding.tvForksCount.setText(getContext().getString(aren.kamalyan.coreui.R.string.repo_details_fork, repo.getForksCount()));
+        binding.tvStartCount.setText(getContext().getString(aren.kamalyan.coreui.R.string.repo_details_star, repo.getStarsCount()));
+        binding.tvCreatedDAte.setText(getContext().getString(aren.kamalyan.coreui.R.string.repo_details_created_on, getCreatedOnText(repo)));
+        binding.ivFavorite.setSelected(repo.isFavorite());
     }
 
     private void setupListeners(RepoUiEntity repo) {
-        if (repo.getHtmlUrl() != null) {
+        if (repo.getHtmlUrl() != null && !repo.getHtmlUrl().isBlank()) {
             binding.btnGithubLink.setVisibility(View.VISIBLE);
             binding.btnGithubLink.setOnClickListener(v -> {
                 Log.d(TAG, "Launching URL: " + repo.getHtmlUrl());
@@ -84,7 +89,7 @@ public class RepoDetailDialog extends Dialog {
             binding.btnGithubLink.setVisibility(View.GONE);
         }
 
-        binding.ivAvatar.setOnClickListener(v -> {
+        binding.ivFavorite.setOnClickListener(v -> {
             if (repo.isFavorite()) {
                 viewModel.removeFromFavorite(repo);
             } else {
@@ -93,11 +98,19 @@ public class RepoDetailDialog extends Dialog {
         });
     }
 
+    private String getOwnerUsernameText(RepoUiEntity repo) {
+        return (repo.getOwnerName() == null || repo.getOwnerName().isEmpty()) ? "---" : repo.getOwnerName();
+    }
+
     private String getDescriptionText(RepoUiEntity repo) {
         return (repo.getDescription() == null || repo.getDescription().isEmpty()) ? getContext().getString(aren.kamalyan.coreui.R.string.repo_no_description) : repo.getDescription();
     }
 
     private String getLanguageText(RepoUiEntity repo) {
-        return (repo.getLanguage() == null || repo.getLanguage().isEmpty()) ? "Not specified" : repo.getLanguage();
+        return (repo.getLanguage() == null || repo.getLanguage().isEmpty()) ? getContext().getString(aren.kamalyan.coreui.R.string.repo_details_language_not_specified) : repo.getLanguage();
+    }
+
+    private String getCreatedOnText(RepoUiEntity repo) {
+        return (repo.getCreatedAt() == null) ? "---" : DateFormatter.getCreatedOnText(repo.getCreatedAt());
     }
 }
