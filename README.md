@@ -52,7 +52,7 @@ We adopted the MVVM (Model-View-ViewModel) pattern while adhering to Clean Archi
 - **Local Development**: To run the project locally, you'll need a GitHub authentication token. Add a `local.properties` file to your project root and include the following:
 
     ```properties
-    github.token="<your-account-token>"
+    github.token=<your-account-token>
     ```
 
 
